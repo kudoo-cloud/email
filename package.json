@@ -1,5 +1,5 @@
 {
-  "name": "@kudoo/kudoo-email",
+  "name": "@kudoo/email",
   "version": "1.0.0",
   "description": "The Kudoo library for dealing with email. Allows adding PDF attachments and i18n of emails",
   "main": "build/index.js",
