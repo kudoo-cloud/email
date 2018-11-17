@@ -23,7 +23,7 @@
       "src/*": ["./src/*"]
     }
   },
-  "files": [""],
+  "files": ["./index.d.ts"],
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }

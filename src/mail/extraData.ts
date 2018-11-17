@@ -1,8 +1,10 @@
-import Account from "kudoo-graphql/services/Account";
-import InvoiceHookups from "kudoo-graphql/services/InvoiceHookups";
-import Invoice from "kudoo-graphql/services/Invoices";
-import TimesheetEntries from "kudoo-graphql/services/TimesheetEntries";
-import Timesheets from "kudoo-graphql/services/Timesheets";
+import {
+  AccountService,
+  InvoiceHookupsService,
+  InvoicesService,
+  TimesheetEntriesService,
+  TimesheetsService,
+} from "@kudoo/graphql";
 import { get, uniq } from "lodash";
 
 const extraData: {
@@ -19,9 +21,9 @@ extraData.invoice_notify = async (
   const { invoice_id } = data;
   try {
     // get Invoice
-    const invoice = await Invoice.get(invoice_id);
+    const invoice = await InvoicesService.get(invoice_id);
     // get invoice hookups
-    const invoiceHookups = await InvoiceHookups.getAll({
+    const invoiceHookups = await InvoiceHookupsService.getAll({
       filters: {
         invoiceId: { eq: invoice_id },
       },
@@ -31,7 +33,7 @@ extraData.invoice_notify = async (
       (item) => item.timeSheetEntryId,
     );
     timeSheetEntriesIds = uniq(timeSheetEntriesIds);
-    const timesheetEntries = await TimesheetEntries.getAll({
+    const timesheetEntries = await TimesheetEntriesService.getAll({
       filters: {
         id: { anyOf: timeSheetEntriesIds },
       },
@@ -40,13 +42,13 @@ extraData.invoice_notify = async (
     const timeSheetIds = get(timesheetEntries, "nodes", []).map(
       (item) => item.timeSheetId,
     );
-    const timesheets = await Timesheets.getAll({
+    const timesheets = await TimesheetsService.getAll({
       filters: {
         id: { anyOf: uniq(timeSheetIds) },
       },
     });
     // get users
-    const meRes = await Account.me();
+    const meRes = await AccountService.me();
     let members = [];
     if (get(meRes, "data.me.companyMembers")) {
       members = get(meRes, "data.me.companyMembers");

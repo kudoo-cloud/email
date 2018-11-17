@@ -1,7 +1,7 @@
+import { GraphQLRequest } from "@kudoo/graphql";
 import sgMail from "@sendgrid/mail";
 import ejs from "ejs";
 import fs from "fs";
-import graphQLRequest from "kudoo-graphql/services";
 import path from "path";
 import extraData from "./extraData";
 
@@ -32,11 +32,10 @@ class Mail {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   }
 
-  public render = async ({ name, type, data }) => {
-    const { user_token, company_token } = data;
-    if (user_token && company_token) {
-      graphQLRequest.userToken = user_token;
-      graphQLRequest.companyToken = company_token;
+  public render = async ({ name, type, data }: IRenderArguments) => {
+    if (data && data.user_token && data.company_token) {
+      GraphQLRequest.userToken = data.user_token;
+      GraphQLRequest.companyToken = data.company_token;
     }
 
     const func = extraData[name];
@@ -52,33 +51,38 @@ class Mail {
     return ejs.render(template, data, { filename });
   }
 
-  public send = async ({
-    templateName,
-    templateData,
-    to = [],
-    cc = [],
-    bcc = [],
-    subject = "",
-    text = "",
-    html = "",
-    isMultiple = false,
-  }) => {
+  public send = async (params: ISendArguments) => {
+    const {
+      templateName,
+      templateData,
+      to = [],
+      cc = [],
+      bcc = [],
+      subject = "",
+      text = "",
+      html = "",
+      isMultiple = false,
+    } = params;
+    let finalHTML = html;
+    let finalText = text;
+    let finalSubject = subject;
+
     if (!templateName && !html && !text) {
       throw new Error("html or text or templateName required");
     }
 
     if (templateName) {
-      html = await this.render({
+      finalHTML = await this.render({
         name: templateName,
         type: "html",
         data: templateData,
       });
-      text = await this.render({
+      finalText = await this.render({
         name: templateName,
         type: "text",
         data: templateData,
       });
-      subject = this.SUBJECTS[templateName];
+      finalSubject = this.SUBJECTS[templateName];
     }
 
     const msg = {
@@ -86,17 +90,17 @@ class Mail {
       cc,
       bcc,
       from: process.env.FROM_EMAIL,
-      subject,
-      text,
-      html,
+      subject: finalSubject,
+      text: finalText,
+      html: finalHTML,
       isMultiple,
     };
     await sgMail.send(msg);
 
     return {
-      html,
-      text,
-      subject,
+      subject: finalSubject,
+      text: finalText,
+      html: finalHTML,
     };
   }
 }
