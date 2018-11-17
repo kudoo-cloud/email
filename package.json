@@ -1,0 +1,47 @@
+{
+  "name": "business-docs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently --kill-others \"npm run chokidar\" \"npm run dev\"",
+    "dev": "nodemon dotenv_config_path=.env.development --exec \"babel-node --extensions '.ts' -r node_modules/dotenv/config ./src/server.ts \"",
+    "build": "babel --extensions '.ts' src --out-dir build && npm run copy-views-dir",
+    "copy-views-dir": "ncp ./src/views ./build/views",
+    "chokidar": "cd ../../shared/graphql && chokidar \"services/**/*.js\" -c \"npm run babel:services\"",
+    "preinstall": "npm run build"
+  },
+  "author": "Kudoo Cloud Pty Ltd",
+  "license": "Copyright",
+  "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
+    "apollo-link": "^1.2.3",
+    "apollo-link-http": "^1.5.5",
+    "body-parser": "^1.18.3",
+    "cross-fetch": "^2.2.2",
+    "dotenv": "^6.0.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "graphql": "^14.0.2",
+    "kudoo-graphql": "file:../../shared/graphql",
+    "lodash": "^4.17.11",
+    "ncp": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-async-to-generator": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "babel-plugin-import-graphql": "^2.6.2",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "chokidar-cli": "^1.2.1",
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.4",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  }
+}

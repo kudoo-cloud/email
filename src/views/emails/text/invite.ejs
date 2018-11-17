@@ -1,0 +1,11 @@
+<% include header %>
+
+<%= first_name %> <%= last_name %> has invited you to join <%= company_name %> company in Kudoo platform.
+<% if(type === 'update') { %>
+To simplify the process we have automatically created an account for this email, so you only need to finalise setup of your account to join <%= company_name %>. You can do that by selecting link below and entering your details.
+<% } else { %>
+To join <%= company_name %> company select link below.
+<% } %>
+<%= token_url %>
+
+<% include footer %>

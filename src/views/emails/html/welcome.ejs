@@ -1,0 +1,63 @@
+<!-- 
+	Path: /email/html/welcome
+	Data Required
+	{
+		"first_name": <User firstname who registered>,
+		"last_name": <User lastname who registered>
+	}
+-->
+<%- include('header', { title: 'Welcome To Kudoo' }); %>
+<tr>
+	<td align="center" valign="top">
+		<table width="640" cellSpacing="0" cellPadding="0" border="0" align="center" style="max-width: 640px; width: 100%"
+		 bgcolor="#FFFFFF">
+			<tbody>
+				<tr>
+					<td align="center" valign="top" style="padding: 50px">
+						<table width="600" cellSpacing="0" cellPadding="0" border="0" align="center" style="max-width: 600px; width: 100%">
+							<tbody>
+								<tr>
+									<td align="left" valign="top" style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
+										Welcome to the Kudoo family
+									</td>
+								</tr>
+								<tr>
+									<td align="left" valign="top" style="padding-bottom: 10px;color: #434856;">
+										<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+											Hi <%= first_name %> <%= last_name %>,
+										</div>
+										<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;line-height: 24px;">
+											We're very excited to have you onboard. We've put together a few helpful hints and tips in case you get stuck at any point.
+										</div>
+										<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;line-height: 24px;">
+											If you'd like to look at the documentation, please head to <a href='https://docs.kudoo.io/user/1.0/'>https://docs.kudoo.io/user/1.0/</a>
+										</div>
+										<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;line-height: 24px;">
+											If you have any questions or queries that can't be answered via the documentation, you can log a post on our forum at <a href='https://community.kudoo.io'>https://community.kudoo.io</a> or else don't hesitate to email us at any time at <a href='mailto:support@kudoo.cloud'>support@kudoo.cloud</a>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td align="left" valign="top" style="padding: 10px 0px">
+										<table width="350" height="60" cellPadding="0" cellSpacing="0" border="0" bgcolor="#29a9db" style="border-radius: 200px">
+											<tbody>
+												<tr>
+													<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+														<a href="/" target="_blank" style="font-family: 'Roboto', sans-serif;color: #ffffff;display: inline-block;text-decoration: none;line-height: 44px;font-size: 15px;font-weight: bold;">
+															Go to Kudoo web app
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
+</tr>
+<%- include('footer'); %>

@@ -1,0 +1,32 @@
+<!-- 
+	Path: /email/html/time_sheet_notify
+	Data Required
+	{
+		"first_name": <User firstname who created timesheet>,
+		"last_name": <User lastname who created timesheet>
+	}
+-->
+<%- include('header', { title: 'Timesheet Notify' }); %>
+<tr>
+	<td align="center" valign="top" style="padding: 50px">
+		<table width="600" cellSpacing="0" cellPadding="0" border="0" align="center" style="max-width: 600px; width: 100%">
+			<tbody>
+				<tr>
+					<td align="left" valign="top" style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
+						Timesheet
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding-bottom: 10px;color: #434856;">
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							Please find attached the latest timesheet from
+							<%= first_name %>
+							<%= last_name %>.
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
+</tr>
+<%- include('footer'); %>

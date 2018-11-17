@@ -1,0 +1,64 @@
+<!-- 
+	Path: /email/html/invite
+	Data Required
+	{
+		"company_name": <Company name who invited user>,
+		"type": <update|company> <update if user need to kudoo platform|company if user is already registered>,
+		"token_url": <URL to which user will be redirected>,
+		"first_name": <Admin/Owner firstname who invited>,
+		"last_name": <Admin/Owner lastname who invited>
+	}
+-->
+<%- include('header', { title: 'Accept Invitation' }); %>
+<tr>
+	<td align="center" valign="top" style="padding: 50px">
+		<table width="600" cellSpacing="0" cellPadding="0" border="0" align="center" style="max-width: 600px; width: 100%">
+			<tbody>
+				<tr>
+					<td align="left" valign="top" style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
+						Company Invitation
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding-bottom: 10px;color: #434856;">
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							<%= first_name %>
+							<%= last_name %> has invited you to join
+							<%= company_name %> company on the Kudoo platform.
+						</div>
+						<% if(type === 'update') { %>
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							To simplify the process we have automatically created your account for this email, so all you need to do to
+							finalise setup of your account is to join
+							<%= company_name %> company.
+						</div>
+						<% } else { %>
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							<span>
+								To join
+								<%= company_name %> company select link below.
+							</span>
+						</div>
+						<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding: 10px 0px">
+						<table width="350" cellPadding="0" cellSpacing="0" border="0" bgcolor="#29a9db" style="border-radius: 200px">
+							<tbody>
+								<tr>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<a href="<%= token_url %>" target="_blank" style="font-family: 'Roboto', sans-serif;color: #ffffff;display: inline-block;text-decoration: none;line-height: 44px;font-size: 15px;font-weight: bold;">
+											Accept Invitation
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
+</tr>
+<%- include('footer'); %>

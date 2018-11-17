@@ -1,0 +1,49 @@
+<!-- 
+	Path: /email/html/remember
+	Data Required
+	{
+		"token_url": <URL to which user will be redirected>,
+	}
+-->
+<%- include('header', { title: 'Reset Password' }); %>
+<tr>
+	<td align="center" valign="top" style="padding: 50px">
+		<table width="600" cellSpacing="0" cellPadding="0" border="0" align="center" style="max-width: 600px; width: 100%">
+			<tbody>
+				<tr>
+					<td align="left" valign="top" style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
+						Forgot your password?
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding-bottom: 10px;color: #434856;">
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							Not to worry. Reset your password by selecting the button
+							below.
+						</div>
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							By tapping the button below you will be taken to a form
+							where you can create a new password.
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding: 10px 0px">
+						<table width="350" height="60" cellPadding="0" cellSpacing="0" border="0" bgcolor="#29a9db" style="border-radius: 200px">
+							<tbody>
+								<tr>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<a href="<%= token_url %>" target="_blank" style="font-family: 'Roboto', sans-serif;color: #ffffff;display: inline-block;text-decoration: none;line-height: 44px;font-size: 15px;font-weight: bold;">
+											Reset Password
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
+</tr>
+<%- include('footer'); %>

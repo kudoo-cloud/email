@@ -1,0 +1,125 @@
+<!-- 
+	Path: /email/html/invoice_notify
+	Data Required
+	{
+		"company_token": "…",
+		"invoice_id": "…",
+		"user_token": "…"
+	}
+	Data Optional
+	{
+	   "includeTimesheet":true,
+		 "includeTimesheetAttachments":true,
+	 }
+-->
+<%- include('header', { title: 'Invoice Notification' }); %>
+<tr>
+	<td align="center" valign="top" style="padding: 50px">
+		<table width="600" cellSpacing="0" cellPadding="0" border="0" align="center" style="max-width: 600px; width: 100%">
+			<tbody>
+				<tr>
+					<td align="left" valign="top" style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
+						Hi
+						<%= invoice.buyer.customer %>,
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding-bottom: 10px;color: #434856;">
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							This email has all the details about your latest invoice.
+							All the attachments are included as links that expire after
+							7 days in order to protect the security of your account.
+							<br />
+							<br />
+							Your latest invoice
+							<%= invoice.number.value %> can be found at the below link:
+							<a href="<%= invoice.pdf.url %>" target="_blank">
+								<%= invoice.pdf.fileName %>
+							</a>
+						</div>
+						<!-- IF User wants to include timesheets and timesheets in array is more than 0 -->
+						<% if(includeTimesheet && timeSheets && timeSheets.length > 0) { %>
+						<div style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							The invoice is made up of the following timesheets:
+						</div>
+						<% } %>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding-bottom: 10px;color: #434856;">
+						<% if(includeTimesheet && timeSheets && timeSheets.length > 0) { %>
+						<table cellPadding="10" cellSpacing="0" border="1" width="100%">
+							<thead>
+								<tr>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										Worker
+									</td>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										Period
+									</td>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										PDF
+									</td>
+									<% if(includeTimesheetAttachments) { %>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										Attchments
+									</td>
+									<% } %>
+								</tr>
+							</thead>
+							<tbody>
+								<% 	for(let index=0; index < (timeSheets || []).length; index++) { 
+										let timesheet = timeSheets[index];
+										let firstName = users[timesheet.userId].firstName;
+										let lastName = users[timesheet.userId].lastName;
+										const startDate = new Date(timesheet.startsAt);
+										const endDate = new Date(timesheet.endsAt);
+										let startsAt = startDate.getFullYear() + "/" + ("00" + startDate.getMonth()).slice(-2) + "/" + ("00" + startDate.getDate()).slice(-2);
+										let endsAt = endDate.getFullYear() + "/" + ("00" + endDate.getMonth()).slice(-2) + "/" + ("00" + endDate.getDate()).slice(-2);
+										let previewUrl = timesheet.preview.url;
+										let attachments = timesheet.attachments || [];
+								%>
+								<tr>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<%= firstName %>
+										<%= lastName %>
+									</td>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<%= startsAt %> -
+										<%= endsAt %>
+									</td>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<% if(previewUrl) { %>
+										<a href="<%= previewUrl %>" target="_blank">
+											Link
+										</a>
+										<% } else { %>
+										<span>-</span>
+										<% } %>
+									</td>
+									<% if(includeTimesheetAttachments) { %>
+									<td align="center" valign="middle" style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<% for(let i=0; i < (attachments || []).length; i++) { 
+												 let attachment = attachments[i];
+												 let attachmentFileName = attachment.fileName || 'Link';
+											%>
+										<div>
+											<a href="<%= attachment.url %>" target="_blank">
+												<%= attachmentFileName %>
+											</a>
+										</div>
+										<% } %>
+									</td>
+									<% } %>
+								</tr>
+								<% } %>
+							</tbody>
+						</table>
+						<% } %>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
+</tr>
+<%- include('footer'); %>

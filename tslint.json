@@ -1,0 +1,17 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "object-literal-sort-keys": false,
+    "one-variable-per-declaration": false,
+    "max-line-length": {
+      "options": [200]
+    },
+    "no-console": [true, "log", "debug", "info"]
+  },
+  "rulesDirectory": [],
+  "linterOptions": {
+    "exclude": ["**/node_modules/**"]
+  }
+}
