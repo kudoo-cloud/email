@@ -1,7 +1,7 @@
 {
-  "name": "kudoo-email",
+  "name": "@kudoo/kudoo-email",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Kudoo library for dealing with email. Allows adding PDF attachments and i18n of emails",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -43,5 +43,18 @@
     "nodemon": "^1.18.4",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KudooCloud/kudoo-email.git"
+  },
+  "keywords": [
+    "email",
+    "i18n",
+    "pdf"
+  ],
+  "bugs": {
+    "url": "https://github.com/KudooCloud/kudoo-email/issues"
+  },
+  "homepage": "https://github.com/KudooCloud/kudoo-email#readme"
 }
