@@ -19,8 +19,8 @@ interface IInviteEmailData {
 
 interface IInvoiceNotifyEmailData {
   invoice_id: string;
-  includeTimesheet: string;
-  includeTimesheetAttachments: string;
+  includeTimesheet?: boolean;
+  includeTimesheetAttachments?: boolean;
 }
 
 interface IRememberEmailData {
