@@ -1,6 +1,6 @@
 {
   "name": "@kudoo/email",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The Kudoo library for dealing with email. Allows adding PDF attachments and i18n of emails",
   "main": "build/index.js",
   "typings": "./index.d.ts",
@@ -12,12 +12,12 @@
     "copy-views-dir": "ncp ./src/views ./build/views",
     "copy-d-ts-files": "copyfiles -u 1 \"./src/**/*.d.ts\" ./build",
     "chokidar": "cd node_modules/@kudoo/graphql/src && chokidar \"services/**/*.js\" -c \"npm run build\"",
-    "postinstall": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "author": "Kudoo Cloud Pty Ltd",
   "license": "MIT",
   "dependencies": {
-    "@kudoo/graphql": "git+https://github.com/KudooCloud/kudoo-graphql.git",
+    "@kudoo/graphql": "^1.0.1",
     "@sendgrid/mail": "^6.3.1",
     "apollo-link": "^1.2.3",
     "apollo-link-http": "^1.5.5",
@@ -43,7 +43,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "chokidar-cli": "^1.2.1",
     "concurrently": "^4.0.1",
-    "nodemon": "^1.18.4",
+    "nodemon": "^1.18.7",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
   },
