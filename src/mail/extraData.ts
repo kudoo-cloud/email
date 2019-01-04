@@ -1,11 +1,5 @@
-import {
-  AccountService,
-  InvoiceHookupsService,
-  InvoicesService,
-  TimesheetEntriesService,
-  TimesheetsService,
-} from "@kudoo/graphql";
-import { get, uniq } from "lodash";
+import { InvoicesService, TimesheetsService } from "@kudoo/graphql";
+import { compact, get, uniq } from "lodash";
 
 const extraData: {
   invoice_notify?: () => any;
@@ -13,55 +7,42 @@ const extraData: {
 
 extraData.invoice_notify = async (
   data: {
-    invoice_id?: string;
+    invoiceId?: string;
     includeTimesheet?: boolean;
     includeTimesheetAttachments?: boolean;
   } = {},
 ) => {
-  const { invoice_id } = data;
+  const { invoiceId } = data;
+  let includeTimesheet = data.includeTimesheet;
+  let includeTimesheetAttachments = data.includeTimesheetAttachments;
+  if (typeof data.includeTimesheet === "string") {
+    includeTimesheet = data.includeTimesheet === "true";
+  }
+  if (typeof data.includeTimesheetAttachments === "string") {
+    includeTimesheetAttachments = data.includeTimesheetAttachments === "true";
+  }
   try {
     // get Invoice
-    const invoice = await InvoicesService.get(invoice_id);
-    // get invoice hookups
-    const invoiceHookups = await InvoiceHookupsService.getAll({
-      filters: {
-        invoiceId: { eq: invoice_id },
-      },
-    });
-    // get timesheetentries
-    let timeSheetEntriesIds = get(invoiceHookups, "nodes", []).map(
-      (item) => item.timeSheetEntryId,
-    );
-    timeSheetEntriesIds = uniq(timeSheetEntriesIds);
-    const timesheetEntries = await TimesheetEntriesService.getAll({
-      filters: {
-        id: { anyOf: timeSheetEntriesIds },
-      },
-    });
-    // get timesheets
-    const timeSheetIds = get(timesheetEntries, "nodes", []).map(
-      (item) => item.timeSheetId,
-    );
-    const timesheets = await TimesheetsService.getAll({
-      filters: {
-        id: { anyOf: uniq(timeSheetIds) },
-      },
-    });
-    // get users
-    const meRes = await AccountService.me();
-    let members = [];
-    if (get(meRes, "data.me.companyMembers")) {
-      members = get(meRes, "data.me.companyMembers");
+    const invoice = await InvoicesService.get(invoiceId);
+    const items = get(invoice, "items") || [];
+    const entries = compact(items.map(({ timeSheetEntry }) => timeSheetEntry));
+    const timeSheets = compact(items.map(({ timeSheet }) => timeSheet));
+    let timeSheetIds = [];
+    if (entries.length > 0) {
+      timeSheetIds = entries.map(({ timeSheet }) => timeSheet.id);
+    } else if (timeSheets.length > 0) {
+      timeSheetIds = timeSheets.map(({ id }) => id);
     }
+    const timesheets = await TimesheetsService.getAll({
+      where: {
+        id_in: uniq(timeSheetIds),
+      },
+    });
     return {
       invoice,
       timeSheets: get(timesheets, "nodes", []),
-      users: members.reduce((acc, { user }) => {
-        acc[user.id] = user;
-        return acc;
-      }, {}),
-      includeTimesheet: data.includeTimesheet || false,
-      includeTimesheetAttachments: data.includeTimesheetAttachments || false,
+      includeTimesheet,
+      includeTimesheetAttachments,
     };
   } catch (error) {
     console.log(error); // tslint:disable-line
