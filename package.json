@@ -17,7 +17,7 @@
   "author": "Kudoo Cloud Pty Ltd",
   "license": "MIT",
   "dependencies": {
-    "@kudoo/graphql": "^1.0.1",
+    "@kudoo/graphql": "beta",
     "@sendgrid/mail": "^6.3.1",
     "apollo-link": "^1.2.3",
     "apollo-link-http": "1.5.7",
