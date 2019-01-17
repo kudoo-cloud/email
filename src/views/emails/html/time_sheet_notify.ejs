@@ -3,7 +3,8 @@
 	Data Required
 	{
 		"first_name": <User firstname who created timesheet>,
-		"last_name": <User lastname who created timesheet>
+		"last_name": <User lastname who created timesheet>,
+		"url": url to download timesheet pdf 
 	}
 -->
 <%- include('header', { title: 'Timesheet Notify' }); %>
@@ -22,6 +23,8 @@
 							Please find attached the latest timesheet from
 							<%= first_name %>
 							<%= last_name %>.
+							<br />
+							or you can download timesheet from <a href="<%= url %>">here</a>. All the links expire after 7 days in order to protect the security of your account.
 						</div>
 					</td>
 				</tr>

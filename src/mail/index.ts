@@ -62,6 +62,7 @@ class Mail {
       text = "",
       html = "",
       isMultiple = false,
+      attachments = [],
     } = params;
     let finalHTML = html;
     let finalText = text;
@@ -94,6 +95,7 @@ class Mail {
       text: finalText,
       html: finalHTML,
       isMultiple,
+      attachments,
     };
     await sgMail.send(msg);
 
