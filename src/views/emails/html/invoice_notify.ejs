@@ -74,8 +74,8 @@
 										let lastName = timesheet.user.lastName;
 										const startDate = new Date(timesheet.startsAt);
 										const endDate = new Date(timesheet.endsAt);
-										let startsAt = startDate.getFullYear() + "/" + ("00" + startDate.getMonth()).slice(-2) + "/" + ("00" + startDate.getDate()).slice(-2);
-										let endsAt = endDate.getFullYear() + "/" + ("00" + endDate.getMonth()).slice(-2) + "/" + ("00" + endDate.getDate()).slice(-2);
+										let startsAt = startDate.getFullYear() + "/" + ("00" + (startDate.getMonth() + 1)).slice(-2) + "/" + ("00" + startDate.getDate()).slice(-2);
+										let endsAt = endDate.getFullYear() + "/" + ("00" + (endDate.getMonth() + 1)).slice(-2) + "/" + ("00" + endDate.getDate()).slice(-2);
 										let previewUrl = timesheet.preview && timesheet.preview.url;
 										let attachments = timesheet.attachments || [];
 								%>
