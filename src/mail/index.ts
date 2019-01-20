@@ -31,7 +31,23 @@ class Mail {
   constructor() {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   }
-
+/**
+ * The function to render the emails. It returns an EJS object.
+ *
+ * @param {IRenderArguments} - interface IRenderArguments {
+ *                                name: string;
+ *                                type: string;
+ *                                data: EmailData;
+ * }
+ * @return {EJS} Think it's an EJS Object. I've installed EJS Types
+ * for Typescript, so once I play around a bit more I'll update this
+ * Documentation
+ *
+ * @example
+ *
+ *      const args = {"confirm","html","{}"};
+ *      render(args);
+ */
   public render = async ({ name, type, data }: IRenderArguments) => {
     if (data && data.user_token && data.company_token) {
       GraphQLRequest.userToken = data.user_token;
@@ -51,6 +67,32 @@ class Mail {
     return ejs.render(template, data, { filename });
   }
 
+/**
+ * The function to render the emails. It returns an EJS object.
+ *
+ * @param {ISendArguments} - interface ISendArguments {
+ *                                templateName?: string;
+ *                                templateData?: EmailData;
+ *                                to: string[];
+ *                                cc?: string[];
+ *                                bcc?: string[];
+ *                                subject?: string;
+ *                                text?: string;
+ *                                html?: string;
+ *                                isMultiple?: boolean;  name: string;
+ *                                type: string;
+ *                                data: EmailData;
+ * }
+ * @return {Object} {
+ *      subject: finalSubject,
+ *      text: finalText,
+ *      html: finalHTML,
+ *   };
+ *
+ * @example
+ *
+ *      render(args);
+ */
   public send = async (params: ISendArguments) => {
     const {
       templateName,

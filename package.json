@@ -19,6 +19,7 @@
   "dependencies": {
     "@kudoo/graphql": "2.0.0",
     "@sendgrid/mail": "^6.3.1",
+    "@types/ejs": "^2.6.1",
     "apollo-link": "^1.2.3",
     "apollo-link-http": "1.5.7",
     "body-parser": "^1.18.3",

@@ -1,0 +1,80 @@
+<!-- 
+	Path: /email/html/confirm
+	Data Required
+	{
+		"token_url": <URL to which User will be required>,
+		"first_name": <User firstname>,
+		"last_name": <User Lastname>
+	}
+-->
+<%- include('header', { title: 'A Kudoo feature you may like' }); %>
+<tr>
+	<td align="center" valign="top" style="padding: 50px">
+		<table
+			width="600"
+			cellSpacing="0"
+			cellPadding="0"
+			border="0"
+			align="center"
+			style="max-width: 600px; width: 100%">
+			<tbody>
+				<tr>
+					<td
+						align="left"
+						valign="top"
+						style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
+						Please verify your email
+					</td>
+				</tr>
+				<tr>
+					<td
+						align="left"
+						valign="top"
+						style="padding-bottom: 10px;color: #434856;">
+						<div
+							style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							Hi <%= first_name %> <%= last_name %>,
+						</div>
+						<div
+							style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							You are almost ready to access your account.
+						</div>
+						<div
+							style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
+							Simply click the button below to verify your email address.
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" style="padding: 10px 0px">
+						<table
+							width="350"
+							height="60"
+							cellPadding="0"
+							cellSpacing="0"
+							border="0"
+							bgcolor="#29a9db"
+							style="border-radius: 200px">
+							<tbody>
+								<tr>
+									<td
+										align="center"
+										valign="middle"
+										style="font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: bold;">
+										<a
+											href="<%= token_url %>"
+											target="_blank"
+											style="font-family: 'Roboto', sans-serif;color: #ffffff;display: inline-block;text-decoration: none;line-height: 44px;font-size: 15px;font-weight: bold;">
+											Verify your email
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</td>
+</tr>
+<%- include('footer'); %>
