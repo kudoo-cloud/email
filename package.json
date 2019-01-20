@@ -1,6 +1,6 @@
 {
   "name": "@kudoo/email",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "The Kudoo library for dealing with email. Allows adding PDF attachments and i18n of emails",
   "main": "build/index.js",
   "typings": "./index.d.ts",
@@ -17,11 +17,11 @@
   "author": "Kudoo Cloud Pty Ltd",
   "license": "MIT",
   "dependencies": {
-    "@kudoo/graphql": "^1.0.1",
+    "@kudoo/graphql": "2.0.0",
     "@sendgrid/mail": "^6.3.1",
     "@types/ejs": "^2.6.1",
     "apollo-link": "^1.2.3",
-    "apollo-link-http": "^1.5.5",
+    "apollo-link-http": "1.5.7",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.0",
     "cross-fetch": "^2.2.2",

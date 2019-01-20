@@ -1,16 +1,7 @@
 const plugins = [
   "@babel/plugin-transform-async-to-generator",
   "@babel/plugin-proposal-class-properties",
-  "import-graphql",
-  [
-    "module-resolver",
-    {
-      root: ["."],
-      alias: {
-        "@kudoo/graphql/*": "@kudoo/graphql/build"
-      }
-    }
-  ]
+  "import-graphql"
 ];
 
 const presets = ["@babel/preset-env", "@babel/preset-typescript"];

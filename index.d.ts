@@ -36,6 +36,7 @@ interface ITimesheetApproveEmailData {
 interface ITimesheetNotifyEmailData {
   first_name: string;
   last_name: string;
+  url?: string;
 }
 
 type EmailData = { company_token?: string; user_token?: string } & (
@@ -53,6 +54,14 @@ interface IRenderArguments {
   data: EmailData;
 }
 
+interface IAttachment {
+  content: string | Buffer;
+  type?: string;
+  filename: string;
+  disposition?: string;
+  content_id?: string;
+}
+
 interface ISendArguments {
   templateName?: string;
   templateData?: EmailData;
@@ -63,6 +72,7 @@ interface ISendArguments {
   text?: string;
   html?: string;
   isMultiple?: boolean;
+  attachments?: IAttachment[];
 }
 
 interface ISendResponse {

@@ -20,7 +20,7 @@
 				<tr>
 					<td align="left" valign="top" style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
 						Hi
-						<%= invoice.buyer.customer %>,
+						<%= invoice.buyer.name %>,
 					</td>
 				</tr>
 				<tr>
@@ -32,9 +32,9 @@
 							<br />
 							<br />
 							Your latest invoice
-							<%= invoice.number.value %> can be found at the below link:
-							<a href="<%= invoice.pdf.url %>" target="_blank">
-								<%= invoice.pdf.fileName %>
+							<%= invoice.number %> can be found at the below link:
+							<a href="<%= invoice.preview.url %>" target="_blank">
+								<%= invoice.preview.fileName %>
 							</a>
 						</div>
 						<!-- IF User wants to include timesheets and timesheets in array is more than 0 -->
@@ -70,13 +70,13 @@
 							<tbody>
 								<% 	for(let index=0; index < (timeSheets || []).length; index++) { 
 										let timesheet = timeSheets[index];
-										let firstName = users[timesheet.userId].firstName;
-										let lastName = users[timesheet.userId].lastName;
+										let firstName = timesheet.user.firstName;
+										let lastName = timesheet.user.lastName;
 										const startDate = new Date(timesheet.startsAt);
 										const endDate = new Date(timesheet.endsAt);
-										let startsAt = startDate.getFullYear() + "/" + ("00" + startDate.getMonth()).slice(-2) + "/" + ("00" + startDate.getDate()).slice(-2);
-										let endsAt = endDate.getFullYear() + "/" + ("00" + endDate.getMonth()).slice(-2) + "/" + ("00" + endDate.getDate()).slice(-2);
-										let previewUrl = timesheet.preview.url;
+										let startsAt = startDate.getFullYear() + "/" + ("00" + (startDate.getMonth() + 1)).slice(-2) + "/" + ("00" + startDate.getDate()).slice(-2);
+										let endsAt = endDate.getFullYear() + "/" + ("00" + (endDate.getMonth() + 1)).slice(-2) + "/" + ("00" + endDate.getDate()).slice(-2);
+										let previewUrl = timesheet.preview && timesheet.preview.url;
 										let attachments = timesheet.attachments || [];
 								%>
 								<tr>
