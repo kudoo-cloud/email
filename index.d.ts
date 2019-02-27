@@ -39,9 +39,20 @@ interface ITimesheetNotifyEmailData {
   url?: string;
 }
 
+interface ISubscriptionEmailData {
+  company_owner: string;
+  company_name: string;
+  company_currency: string;
+  invoice_total: number;
+  isMJML: boolean;
+  subscription_url: string;
+  type: string;
+}
+
 type EmailData = { company_token?: string; user_token?: string } & (
   | IWelcomeEmailData
   | IConfirmEmailData
+  | ISubscriptionEmailData
   | IInviteEmailData
   | IInvoiceNotifyEmailData
   | IRememberEmailData
@@ -91,6 +102,7 @@ declare module "@kudoo/email" {
       time_sheet_approve: string;
       time_sheet_notify: string;
       welcome: string;
+      subscription: string;
     };
     public SUBJECTS: {
       confirm: string;
@@ -100,6 +112,7 @@ declare module "@kudoo/email" {
       time_sheet_approve: string;
       time_sheet_notify: string;
       welcome: string;
+      subscription: string;
     };
     public render(params: IRenderArguments): string;
     public send(params: ISendArguments): ISendResponse;

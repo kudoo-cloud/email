@@ -1,7 +1,11 @@
 import { GraphQLRequest } from "@kudoo/graphql";
+import { SubscriptionMJMLToHTMLConverter } from "../views/emails/mjml";
+
 import sgMail from "@sendgrid/mail";
 import ejs from "ejs";
 import fs from "fs";
+import isEqual from "lodash/isEqual";
+import isNull from "lodash/isNull";
 import path from "path";
 import extraData from "./extraData";
 
@@ -16,6 +20,7 @@ class Mail {
     time_sheet_approve: "time_sheet_approve",
     time_sheet_notify: "time_sheet_notify",
     welcome: "welcome",
+    subscription: "subscription",
   };
 
   public SUBJECTS = {
@@ -26,6 +31,7 @@ class Mail {
     time_sheet_approve: "Timesheet Approve",
     time_sheet_notify: "TimeSheet notification",
     welcome: "Welcome to Kudoo",
+    subscription: "Kudoo Subscription",
   };
 
   constructor() {
@@ -113,12 +119,17 @@ class Mail {
     if (!templateName && !html && !text) {
       throw new Error("html or text or templateName required");
     }
-
     if (templateName) {
+      let MJMLToHTML = null;
+      if (templateData.isMJML) {
+        if (isEqual(templateData.type, "subscription")) {
+          MJMLToHTML = SubscriptionMJMLToHTMLConverter(templateData);
+        }
+      }
       finalHTML = await this.render({
         name: templateName,
         type: "html",
-        data: templateData,
+        data: isNull(MJMLToHTML) ? templateData : { html_code : MJMLToHTML.html.trim() },
       });
       finalText = await this.render({
         name: templateName,
