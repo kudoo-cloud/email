@@ -1,6 +1,13 @@
-import mjml2html from 'mjml';
+import mjml2html from "mjml";
 
-export const SubscriptionMJMLToHTMLConverter = ({ company_owner, company_name, company_currency, invoice_total, subscription_url }) => mjml2html(`
+export const SubscriptionMJMLToHTMLConverter = ({
+  company_owner,
+  company_name,
+  company_currency,
+  invoice_total,
+  subscription_url,
+}) =>
+  mjml2html(`
   <mjml>
     <mj-body>
       <mj-section>
