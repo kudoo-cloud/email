@@ -65,5 +65,8 @@
 	"bugs": {
 		"url": "https://github.com/KudooCloud/kudoo-email/issues"
 	},
-	"homepage": "https://github.com/KudooCloud/kudoo-email#readme"
+	"homepage": "https://github.com/KudooCloud/kudoo-email#readme",
+	"publishConfig": {
+		"access": "public"
+	}
 }
