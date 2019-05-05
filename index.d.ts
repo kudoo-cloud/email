@@ -103,6 +103,7 @@ declare module "@kudoo/email" {
       time_sheet_notify: string;
       welcome: string;
       subscription: string;
+      test_ping: string;
     };
     public SUBJECTS: {
       confirm: string;
@@ -113,6 +114,7 @@ declare module "@kudoo/email" {
       time_sheet_notify: string;
       welcome: string;
       subscription: string;
+      test_ping: string;
     };
     public render(params: IRenderArguments): string;
     public send(params: ISendArguments): ISendResponse;
