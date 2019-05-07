@@ -1,6 +1,6 @@
 {
 	"name": "@kudoo/email",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "The Kudoo library for dealing with email. Allows adding PDF attachments and i18n of emails",
 	"main": "build/index.js",
 	"typings": "./index.d.ts",
@@ -8,8 +8,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "concurrently --kill-others \"npm run chokidar\" \"npm run dev\"",
 		"dev": "nodemon dotenv_config_path=.env.development --exec \"babel-node --extensions '.ts' -r node_modules/dotenv/config ./src/server.ts \"",
-		"build": "rm -rf build && babel --extensions '.ts' src --out-dir build --ignore \"src/**/**/*.d.ts\" && npm run copy-views-dir",
-		"copy-views-dir": "ncp ./src/views ./build/views",
+		"build": "rimraf build && babel --extensions '.ts' src --out-dir build --ignore \"src/**/**/*.d.ts\" && npm run copy-views-dir",
+		"copy-views-dir": "ncp ./src/views ./build/views && rimraf ./build/views/emails/*.ts",
 		"copy-d-ts-files": "copyfiles -u 1 \"./src/**/*.d.ts\" ./build",
 		"chokidar": "cd node_modules/@kudoo/graphql/src && chokidar \"services/**/*.js\" -c \"npm run build\"",
 		"prepublishOnly": "npm run build",
@@ -50,6 +50,7 @@
 		"concurrently": "^4.0.1",
 		"nodemon": "^1.18.7",
 		"np": "^4.0.2",
+		"rimraf": "^2.6.3",
 		"tslint": "^5.11.0",
 		"typescript": "^3.1.6"
 	},

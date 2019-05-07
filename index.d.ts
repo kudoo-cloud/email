@@ -114,6 +114,7 @@ declare module "@kudoo/email" {
       time_sheet_notify: string;
       welcome: string;
       subscription: string;
+      test_ping: string;
       purchase_order: string;
     };
     public SUBJECTS: {
@@ -125,6 +126,7 @@ declare module "@kudoo/email" {
       time_sheet_notify: string;
       welcome: string;
       subscription: string;
+      test_ping: string;
       purchase_order: string;
     };
     public render(params: IRenderArguments): string;

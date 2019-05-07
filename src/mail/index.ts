@@ -21,6 +21,7 @@ class Mail {
     welcome: "welcome",
     subscription: "subscription",
     purchase_order: "purchase_order",
+    test_ping: "test_ping",
   };
 
   public SUBJECTS = {
@@ -32,6 +33,7 @@ class Mail {
     time_sheet_notify: "TimeSheet notification",
     welcome: "Welcome to Kudoo",
     subscription: "Kudoo Subscription",
+    test_ping: "Smoke Test Ping",
     purchase_order: "Purchase Order",
   };
 
@@ -122,7 +124,7 @@ class Mail {
     }
     if (templateName) {
       let MJMLToHTML = null;
-      if ((templateData as any).isMJML) {
+      if (templateData && (templateData as any).isMJML) {
         if (isEqual((templateData as any).type, "subscription")) {
           MJMLToHTML = SubscriptionMJMLToHTMLConverter(templateData as any);
         }
