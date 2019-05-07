@@ -42,3 +42,36 @@ export const SubscriptionMJMLToHTMLConverter = ({
     </mj-body>
   </mjml>
 `);
+
+export const PurchaseOrderMJMLToHTMLConverter = ({
+  poNumber,
+  name,
+  companyName,
+  preview,
+}) =>
+  mjml2html(`
+    <mjml>
+      <mj-body>
+        <mj-section>
+          <mj-column>
+            <mj-text
+              font-size="22px"
+              color="#434856"
+              font-family="'Roboto', sans-serif">
+              Dear ${name},
+            </mj-text>
+            <mj-text
+              padding-left="40px"
+              font-size="17px"
+              color="#434856"
+              font-family="'Roboto', sans-serif">
+                Please find attached Purchase Order #${poNumber} from ${companyName} :
+                <a href="${preview.url}" target="_blank">
+                  ${preview.fileName}
+                </a>
+            </mj-text>
+          </mj-column>
+        </mj-section>
+      </mj-body>
+    </mjml>
+`);

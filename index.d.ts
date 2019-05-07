@@ -23,6 +23,16 @@ interface IInvoiceNotifyEmailData {
   includeTimesheetAttachments?: boolean;
 }
 
+interface IPurchaseOrderData {
+  poNumber: number;
+  name: string;
+  companyName: string;
+  preview: object;
+  isSendViaEDI: boolean;
+  isMJML: boolean;
+  type: string;
+}
+
 interface IRememberEmailData {
   token_url: string;
 }
@@ -57,7 +67,8 @@ type EmailData = { company_token?: string; user_token?: string } & (
   | IInvoiceNotifyEmailData
   | IRememberEmailData
   | ITimesheetApproveEmailData
-  | ITimesheetNotifyEmailData);
+  | ITimesheetNotifyEmailData
+  | IPurchaseOrderData);
 
 interface IRenderArguments {
   name: string;
@@ -103,6 +114,7 @@ declare module "@kudoo/email" {
       time_sheet_notify: string;
       welcome: string;
       subscription: string;
+      purchase_order: string;
     };
     public SUBJECTS: {
       confirm: string;
@@ -113,6 +125,7 @@ declare module "@kudoo/email" {
       time_sheet_notify: string;
       welcome: string;
       subscription: string;
+      purchase_order: string;
     };
     public render(params: IRenderArguments): string;
     public send(params: ISendArguments): ISendResponse;
