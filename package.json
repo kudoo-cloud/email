@@ -1,6 +1,6 @@
 {
 	"name": "@kudoo/email",
-	"version": "2.0.4",
+	"version": "2.0.5",
 	"description": "The Kudoo library for dealing with email. Allows adding PDF attachments and i18n of emails",
 	"main": "build/index.js",
 	"typings": "./index.d.ts",
