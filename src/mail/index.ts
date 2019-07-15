@@ -12,6 +12,7 @@ const EMAIL_TEMPLATE_BASE = path.resolve(__dirname + "/../views/emails");
 
 class Mail {
   public TEMPLATES = {
+    company_delete: "company_delete",
     confirm: "confirm",
     invite: "invite",
     invoice_notify: "invoice_notify",
@@ -25,6 +26,7 @@ class Mail {
   };
 
   public SUBJECTS = {
+    company_delete: "Kudoo company scheduled for deletion",
     confirm: "Confirm email address",
     invite: "You have been invited to Kudoo",
     invoice_notify: "Invoice Notification",

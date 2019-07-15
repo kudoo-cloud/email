@@ -2,11 +2,10 @@
 	Path: /email/html/confirm
 	Data Required
 	{
-		"first_name": <User firstname>,
-		"last_name": <User Lastname>
+		"company_id"
 	}
 -->
-<%- include('header', { title: 'Kudoo company deleted' }); %>
+<%- include('header', { title: 'Kudoo company scheduled to be deleted' }); %>
 <tr>
 	<td align="center" valign="top" style="padding: 50px">
 		<table
@@ -22,7 +21,7 @@
 						align="left"
 						valign="top"
 						style="font-family: 'Roboto', sans-serif;padding-bottom: 10px;font-size: 25px;font-weight: 600;color: #434856;">
-						Your Kudoo company has been deleted
+						Kudoo company scheduled for deletion
 					</td>
 				</tr>
 				<tr>
@@ -32,7 +31,7 @@
 						style="padding-bottom: 10px;color: #434856;">
 						<div
 							style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
-							Hi <%= first_name %> <%= last_name %>,
+							<%= company_id %> wants to delete their company,
 						</div>
 						<div
 							style="font-size: 17px;margin-bottom: 10px;font-family: 'Roboto', sans-serif;">
