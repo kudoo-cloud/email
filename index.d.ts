@@ -110,6 +110,7 @@ interface ISendResponse {
 declare module "@kudoo/email" {
   class KudooMail {
     public TEMPLATES: {
+      company_delete: string,
       confirm: string;
       invite: string;
       invoice_notify: string;
@@ -122,6 +123,7 @@ declare module "@kudoo/email" {
       purchase_order: string;
     };
     public SUBJECTS: {
+      company_delete: string,
       confirm: string;
       invite: string;
       invoice_notify: string;
