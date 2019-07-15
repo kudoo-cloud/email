@@ -1,3 +1,6 @@
+interface ICompanyDeleteData {
+  company_id: string;
+}
 interface IWelcomeEmailData {
   first_name: string;
   last_name: string;
@@ -68,6 +71,7 @@ type EmailData = { company_token?: string; user_token?: string } & (
   | IRememberEmailData
   | ITimesheetApproveEmailData
   | ITimesheetNotifyEmailData
+  | ICompanyDeleteData
   | IPurchaseOrderData);
 
 interface IRenderArguments {
